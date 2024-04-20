@@ -2,15 +2,15 @@ import React from 'react'
 
 const DummyNavbar = () => {
     return (
-        <div style={style.container}>
+        <div style={style.container as React.CSSProperties}>
 
-            <div style={style.navbar}>
+            <div style={style.navbar as React.CSSProperties}>
                 {Array.from({ length: 10 }).map((_, i) => (
                     <div key={i} style={style.tool}></div>
                 ))}
             </div>
 
-            <div style={style.toolElements}>
+            <div style={style.toolElements as React.CSSProperties}>
                 {Array.from({ length: 2 }).map((_, i) => (
                     <div key={i} style={style.tool}></div>
                 ))}

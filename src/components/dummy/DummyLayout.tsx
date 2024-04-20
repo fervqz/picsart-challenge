@@ -9,9 +9,9 @@ interface Props {
 
 const DummyLayout: React.FC<Props> = ({ children }: Props) => {
     return (
-        <main style={style.main}>
+        <main style={style.main as React.CSSProperties}>
             <DummyHeader />
-            <div style={style.content}>
+            <div style={style.content as React.CSSProperties}>
 
                 <DummyNavbar />
 

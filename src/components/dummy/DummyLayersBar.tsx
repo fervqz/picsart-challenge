@@ -2,7 +2,7 @@ import React from 'react'
 
 const DummyLayersBar = () => {
     return (
-        <div style={style.container}>
+        <div style={style.container as React.CSSProperties}>
             {Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} style={style.layer}></div>
             ))}
