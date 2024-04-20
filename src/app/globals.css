@@ -3,8 +3,20 @@
 *,
 *::before,
 *::after {
+  --bg-border: #d8d8d8;
+  --card-bg-color: #f7f7f7;
+  --placeholder-bg-color: #d6d6d6;
+  --border-radius: 0.5rem;
+
   box-sizing: border-box;
   margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
 }
 
 body {

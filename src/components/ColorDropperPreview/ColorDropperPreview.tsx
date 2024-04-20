@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 
 interface Props {
-    data: Uint8ClampedArray;
+    data: Uint8ClampedArray | null;
     size: number;
 }
 
@@ -12,7 +12,6 @@ const ColorDropperPreview: React.FC<Props> = ({ data, size }: Props) => {
 
     const styles = {
         container: {
-            marginTop: '3rem',
             display: 'grid',
             gridTemplateColumns: `repeat(${size}, 1fr)`,
             gridTemplateRows: `repeat(${size}, 1fr)`,
@@ -33,6 +32,7 @@ const ColorDropperPreview: React.FC<Props> = ({ data, size }: Props) => {
     const [colors, setColors] = useState<string[]>([]);
 
     useEffect(() => {
+        if (!data) { return; }
         setColors(mapData(data));
     }, [data]);
 
@@ -55,20 +55,17 @@ const ColorDropperPreview: React.FC<Props> = ({ data, size }: Props) => {
     return (
         <div ref={previewRef} style={styles.container}>
             {colors.map((color, i) => {
-
-                const middle = Math.round(size * size / 2) - 1;
-
+                const middlePixelIndex = Math.round(size * size / 2) - 1;
                 return (
                     <div
                         key={i}
                         style={{
                             ...styles.pixel,
                             backgroundColor: color,
-                            border: middle === i ? '1.5px solid white' : 'none',
+                            border: middlePixelIndex === i ? '1.5px solid white' : 'none',
                         }}
                     ></div>
                 );
-
             })}
         </div>
     );
