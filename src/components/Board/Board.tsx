@@ -1,52 +1,77 @@
 'use client';
+import "./styles.css";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import ColorDropperPreview from '@/components/ColorDropperPreview2/ColorDropperPreview2';
+import ColorPickerPreview from '@/components/ColorPickerPreview/ColorPickerPreview';
+import useColorPickerStore from "@/store/colorPicker";
+import BoardToolbar from "../BoardToolbar/BoardToolbar";
+import { clearCanvas, renderPrecissionTest } from "@/lib/utils";
 
 const Board: React.FC = () => {
 
-    let lastMove = 0;
-    const previewSize = 11;
+    const [showPreview, setShowPreview] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasWrapperRef = useRef<HTMLDivElement>(null);
     const previewWrapperRef = useRef<HTMLDivElement>(null);
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
     const [previewData, setPreviewData] = useState<Uint8ClampedArray | null>(null);
-    const [colorDropperWrapperStyles, setColorDropperWrapperStyles] = useState<CSSProperties>({});
+    const [colorDropperWrapperStyles, setColorDropperWrapperStyles] = useState<CSSProperties>({
+        position: 'absolute',
+        transition: 'transform 20ms ease-in-out',
+        left: `${0}px`,
+        top: `${0}px`,
+        pointerEvents: 'none',
+    });
 
-    useEffect(() => {
-        const newCtx = canvasRef.current?.getContext("2d", { willReadFrequently: true }) ?? null;
-        setCtx(newCtx);
-    }, []);
+    const { previewSize, currentTool, hoveredColor, image, setCurrentTool, setCurrentColor } = useColorPickerStore((state: any) => state);
 
     useEffect(() => {
         canvasRef.current?.setAttribute('width', `${canvasWrapperRef.current?.clientWidth}px`);
         canvasRef.current?.setAttribute('height', `${canvasWrapperRef.current?.clientHeight}px`);
-    }, [canvasWrapperRef]);
+        const newCtx = canvasRef.current?.getContext("2d", { willReadFrequently: true }) ?? null;
+        setCtx(newCtx);
+        window.addEventListener('resize', renderImage);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => renderImage(), [ctx]);
+    useEffect(() => renderImage(), [ctx, image]);
 
     const renderImage = () => {
         if (!ctx) { return; }
+
+        clearCanvas(ctx);
+
         const img = new Image();
-        img.src = "/img/beach.jpg";
+        // img.src = "/img/map.jpg";
+        // img.src = "/img/6200x6200.jpg";
+        img.src = image;
         img.setAttribute('crossOrigin', 'anonymous');
         img.onload = () => {
-            const imgWidth = img.width * .4;
-            const imgHeight = img.height * .4;
-            const imgX = canvasRef.current?.width as number / 2 - imgWidth / 2;
-            const imgY = canvasRef.current?.height as number / 2 - imgHeight / 2;
-            ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
+
+            const imgWidth = img.width * .5;
+            const imgHeight = img.height * .5;
+            const imgX = ctx.canvas.width as number / 2 - imgWidth / 2;
+            const imgY = ctx.canvas.height as number / 2 - imgHeight / 2;
+            ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+
+            renderPrecissionTest(ctx);
         };
+
+
     }
 
+    const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        if (currentTool === 'color-picker' && showPreview) {
+            setCurrentColor(hoveredColor);
+            setCurrentTool(null);
+        }
+    };
+
+
     const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        if (!ctx) { return; }
 
-        const now = Date.now();
-        if (now - lastMove < 1000) { return; }
-        lastMove = now;
-
-        const rect = canvasRef.current?.getBoundingClientRect() ?? { left: 0, top: 0 };
+        const rect = ctx.canvas.getBoundingClientRect() ?? { left: 0, top: 0 };
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
@@ -55,13 +80,10 @@ const Board: React.FC = () => {
         const previewWidth = previewSize;
         const previewHeight = previewSize;
 
-        setColorDropperWrapperStyles({
-            position: 'absolute',
-            transform: `translate(${x}px, ${y}px)`,
-            left: `${0}px`,
-            top: `${0}px`,
-            pointerEvents: 'none',
-        });
+        setColorDropperWrapperStyles((prev) => ({
+            ...prev,
+            transform: `translate(${x - previewSize * 10 / 2}px, ${y - previewSize * 10 / 2}px)`,
+        }));
 
         setPreviewData(
             ctx?.getImageData(
@@ -73,70 +95,38 @@ const Board: React.FC = () => {
         );
     }
 
+    const handleWheel = (e: React.WheelEvent<HTMLCanvasElement>) => {
+        if (!ctx) { return; }
+        clearCanvas(ctx);
+        const scaleFactor = 1 + e.deltaY * -0.001;
+        ctx?.scale(scaleFactor, scaleFactor);
+        renderImage();
+    }
+
     return (
-        // @ts-ignore
-        <div style={styles.boardWrapper}>
-            {/* @ts-ignore */}
-            <div style={styles.toolbar}>
-                <span>Toolbar</span>
-                <span>Toolbar</span>
-                <span>Toolbar</span>
-            </div>
-            {/* @ts-ignore */}
-            <div ref={canvasWrapperRef} style={styles.canvasWrapper}>
+        <div className="board-wrapper">
+            <BoardToolbar />
+            <div ref={canvasWrapperRef} className="canvas-wrapper">
                 <canvas
                     ref={canvasRef}
-                    style={styles.mainCanvas}
+                    className="main-canvas"
                     onMouseMove={handleMouseMove}
+                    onMouseDown={handleMouseDown}
+                    onMouseEnter={() => setShowPreview(true)}
+                    onMouseLeave={() => setShowPreview(false)}
+                    onWheel={handleWheel}
+                    style={{ cursor: currentTool === 'color-picker' && showPreview ? 'none' : 'default' }}
                 ></canvas>
-                {/* @ts-ignore */}
-                <div ref={previewWrapperRef} style={colorDropperWrapperStyles}>
-                    <ColorDropperPreview data={previewData} size={previewSize} />
-                </div>
+
+                {currentTool === 'color-picker' && showPreview && (
+                    <div ref={previewWrapperRef} style={colorDropperWrapperStyles}>
+                        <ColorPickerPreview data={previewData} size={previewSize} />
+                    </div>
+                )}
+
             </div>
-        </div>
+        </div >
     );
 }
 
 export default Board;
-
-const styles = {
-    loading: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-    },
-    boardWrapper: {
-        flex: 1,
-        height: '100%',
-        backgroundColor: '#ededed',
-        display: 'flex',
-        flexDirection: 'column',
-    },
-    toolbar: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'var(--card-bg-color)',
-        height: '3rem',
-        gap: '1rem',
-    },
-    canvasWrapper: {
-        // width: '100%',
-        height: '100%',
-        position: 'relative',
-    },
-    mainCanvas: {
-        backgroundColor: '#ededed',
-        width: '100%',
-        height: '100%',
-    },
-    colorDropperWrapper: {
-        position: 'absolute',
-        top: '10px',
-        left: '10px',
-    },
-};
