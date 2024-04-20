@@ -11,7 +11,6 @@ const Board: React.FC = () => {
     const [showPreview, setShowPreview] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const canvasWrapperRef = useRef<HTMLDivElement>(null);
-    const previewWrapperRef = useRef<HTMLDivElement>(null);
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
     const [previewData, setPreviewData] = useState<Uint8ClampedArray | null>(null);
     const [colorDropperWrapperStyles, setColorDropperWrapperStyles] = useState<CSSProperties>({
@@ -119,7 +118,7 @@ const Board: React.FC = () => {
                 ></canvas>
 
                 {currentTool === 'color-picker' && showPreview && (
-                    <div ref={previewWrapperRef} style={colorDropperWrapperStyles}>
+                    <div style={colorDropperWrapperStyles}>
                         <ColorPickerPreview data={previewData} size={previewSize} />
                     </div>
                 )}
