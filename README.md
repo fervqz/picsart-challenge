@@ -31,15 +31,16 @@ The app was made with React, Typescript and vanilla CSS. It is hosted on vercel 
 
 ### Features
 **Technical Requirements**
-- [x] **Usage of Canvas**: The HTML canvas tag was used in the main working are and for the preview.
-- [x] **Usage of Typescript**: The project was written in Typescript..
-- [x] **Being able to work with at least 16 MB(4000 * 4000) canvas**: The projects handdles large images, it is possible to zoom in and out to fit the images in the canvas. Also, there's is a select option that sets different images to test.
+- [x] **_"Usage of Canvas"_** 
+  - The HTML canvas tag was used in the main working are and for the preview.
+- [x] **_"Usage of Typescript"_**
+  - The project was written in Typescript..
+- [x] **_"Being able to work with at least 16 MB(4000 * 4000) canvas"_**
+  -  The projects handdles large images, it is possible to zoom in/out and pan to fit the images in the canvas.
 
 **Extra features**
 - **Color comparison**: When hovering over a color, it will show the hovering color next to the last current color so it's easy to compare.
 - **Image Selection**: There's is a select that allows the user to select an image from the list of images.
-- **Zoom**: The user can zoom in and out to fit the image in the canvas.
-- **Pan**: The user can pan to see the whole image.
 - **Copy to clipboard**: The user can copy the color picker hexadecimal value to clipboard.
 
 ### Approach
