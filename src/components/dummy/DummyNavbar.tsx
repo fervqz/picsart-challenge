@@ -33,7 +33,7 @@ const style = {
         display: 'flex',
         flexDirection: 'column',
         gap: '1rem',
-        width: '5.5rem',
+        width: '5.9rem',
         padding: '1rem',
         backgroundColor: 'var(--card-bg-color)',
     },
