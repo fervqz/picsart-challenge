@@ -7,6 +7,7 @@ const IMAGES: Image[] = [
     { name: 'Beach - 488 KB - 1920x1080', src: '/img/beach.jpg' },
     { name: 'Map - 15.3 MB - 9489x7444', src: '/img/map.jpg' },
     { name: 'Space - 19.1 MB - 6200x6200', src: '/img/space.jpg' },
+    { name: 'Landscape - 35.9 MB - 5184x3456', src: '/img/landscape.png' },
 ];
 
 export default IMAGES;

@@ -1,6 +1,6 @@
+import React from "react";
 import Board from "@/components/Board/Board";
 import DummyLayout from "@/components/dummy/DummyLayout";
-import React from "react";
 
 const Home = () => {
   return (

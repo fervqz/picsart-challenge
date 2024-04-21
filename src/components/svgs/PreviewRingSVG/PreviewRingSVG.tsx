@@ -22,8 +22,7 @@ const PreviewRingSVG: React.FC<Props> = ({ color = '#D9D9D9' }: Readonly<Props>)
             />
             Hellow
         </svg>
-
-    )
+    );
 }
 
 export default PreviewRingSVG

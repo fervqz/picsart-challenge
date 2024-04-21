@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react'
 import './styles.css';
-import useColorPickerStore from '@/store/colorPicker';
+import React, { useEffect, useRef, useState } from 'react'
 import ColorPickerIconSVG from '@/components/svgs/ColorPickerIconSVG/ColorPickerIconSVG';
+import useColorPickerStore, { ColorPickerStore } from '@/store/colorPicker';
 
 const ColorPickerButton = () => {
 
     const [isToolActive, setIsToolActive] = useState(false);
-    const currentTool = useColorPickerStore((state: any) => state.currentTool);
-    const setCurrentTool = useColorPickerStore((state: any) => state.setCurrentTool);
+    const { activeTool, setActiveTool } = useColorPickerStore((state: ColorPickerStore) => state);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
-        setIsToolActive(currentTool === 'color-picker');
-    }, [currentTool]);
+        setIsToolActive(activeTool === 'color-picker');
+    }, [activeTool]);
 
     useEffect(() => {
-        setCurrentTool(isToolActive ? 'color-picker' : null);
+        setActiveTool(isToolActive ? 'color-picker' : null);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isToolActive]);
 
     const handleClick = () => {
@@ -30,7 +30,6 @@ const ColorPickerButton = () => {
         >
             <ColorPickerIconSVG />
         </button>
-
     )
 }
 

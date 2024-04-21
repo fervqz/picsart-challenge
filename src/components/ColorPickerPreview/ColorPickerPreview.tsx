@@ -1,21 +1,28 @@
 'use client';
 import './styles.css';
+import React, { CSSProperties, useEffect, useRef, useState } from 'react';
 import { drawPixel, parseUint8ClampedArray } from '@/lib/utils';
-import React, { useEffect, useRef, useState } from 'react';
 import PreviewRingSVG from '../svgs/PreviewRingSVG/PreviewRingSVG';
-import useColorPickerStore from '@/store/colorPicker';
+import useColorPickerStore, { ColorPickerStore } from '@/store/colorPicker';
 
 interface Props {
     data: Uint8ClampedArray | null;
     size: number;
+    position: {
+        x: number;
+        y: number;
+    }
 }
 
-const ColorPickerPreview: React.FC<Props> = ({ data, size }: Props) => {
+const ColorPickerPreview: React.FC<Props> = ({ data, size, position }: Readonly<Props>) => {
 
-    const { hoveredColor, setHoveredColor } = useColorPickerStore((state: any) => state);
+    const { hoveredColor, setHoveredColor } = useColorPickerStore((state: ColorPickerStore) => state);
+
     const previewRef = useRef<HTMLCanvasElement>(null);
     const [colors, setColors] = useState<string[]>([]);
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
+
+    const [colorDropperWrapperStyles, setColorDropperWrapperStyles] = useState<CSSProperties>({});
 
     useEffect(() => {
         setCtx(
@@ -29,6 +36,13 @@ const ColorPickerPreview: React.FC<Props> = ({ data, size }: Props) => {
         draw();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    useEffect(() => {
+        setColorDropperWrapperStyles((prev) => ({
+            ...prev,
+            transform: `translate(${position.x}px, ${position.y}px)`,
+        }));
+    }, [position]);
 
 
     const draw = () => {
@@ -66,7 +80,7 @@ const ColorPickerPreview: React.FC<Props> = ({ data, size }: Props) => {
     }
 
     return (
-        <div className='preview-wrapper'>
+        <div className='preview-wrapper' style={colorDropperWrapperStyles}>
             <canvas
                 ref={previewRef}
                 width={size * 10}
