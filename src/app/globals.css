@@ -2,10 +2,12 @@
 *,
 *::before,
 *::after {
-  --bg-border: #d8d8d8;
+  --bg-border: #e2e2e2;
   --card-bg-color: #f7f7f7;
-  --placeholder-bg-color: #d6d6d6;
+  --placeholder-bg-color: #eaeaea;
   --border-radius: 0.5rem;
+  --picsart-primary: #c208c1;
+  --picsart-accent: #5a00ee;
 
   box-sizing: border-box;
   margin: 0;

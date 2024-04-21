@@ -1,11 +1,22 @@
 import React from 'react'
+import PicsartLogoSVG from '../svgs/PicsartLogoSVG/PicsartLogoSVG';
+import Button from '../Button/Button';
+import DownloadSVG from '../svgs/DownloadSVG/DownloadSVG';
 
 const DummyHeader = () => {
     return (
         <nav style={style.navbar}>
-            <div style={style.logo}></div>
+            <div style={style.logo}>
+                <PicsartLogoSVG />
+            </div>
             <p style={style.title}>Picsart Challenge</p>
-            <div style={style.export}></div>
+            <div>
+                <Button>
+                    <div style={style.export}>
+                        <DownloadSVG color='white' />&nbsp;Export
+                    </div>
+                </Button>
+            </div>
         </nav>
     )
 }
@@ -22,20 +33,18 @@ const style = {
         backgroundColor: 'var(--card-bg-color)',
     },
     logo: {
-        backgroundColor: 'var(--placeholder-bg-color)',
-        borderRadius: 'var(--border-radius)',
-        width: '7rem',
-        height: '3rem',
+        paddingInline: '4px',
     },
     title: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        fontSize: '0.9rem',
+        fontWeight: '300',
     },
     export: {
-        backgroundColor: 'var(--placeholder-bg-color)',
-        borderRadius: 'var(--border-radius)',
-        width: '7rem',
-        height: '3rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 };

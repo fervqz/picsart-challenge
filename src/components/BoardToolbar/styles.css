@@ -4,7 +4,8 @@
 
   background-color: var(--card-bg-color);
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 10px;
+  border-bottom: 1px solid var(--bg-border);
 }
 
 .compare-container {
@@ -14,11 +15,10 @@
   align-items: center;
   flex: 1;
   gap: 1rem;
-  padding: 1rem;
 }
 
 .compare-colors {
-  border-radius: 10px;
+  border-radius: 4px;
   overflow: hidden;
   width: 32px;
   height: 32px;
@@ -32,11 +32,71 @@
 }
 
 .color-badge {
-  min-width: 5rem;
+  position: relative;
+  min-width: 7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .controls {
   display: flex;
   justify-content: end;
   align-items: center;
+}
+
+.copy-btn {
+  border: none;
+  background-color: transparent;
+  border-radius: 100%;
+  max-width: 2rem;
+  max-height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+
+  &.active {
+    background-color: #dcdcdc;
+  }
+
+  &>* {
+    stroke: gray;
+  }
+
+  &>*:hover {
+    stroke: black;
+  }
+
+  &>span {
+    color: rgb(75, 75, 75);
+    position: absolute;
+    right: -90px;
+    font-size: 0.7rem;
+    width: 130%;
+    animation: hide 2s ease-in-out forwards;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.controls>select {
+  border: none;
+  background-color: rgb(231, 231, 231);
+  padding: 0.5rem;
+  border-radius: 4px;
 }
