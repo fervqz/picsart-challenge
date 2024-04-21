@@ -2,14 +2,11 @@
   border: none;
   background-color: transparent;
   border-radius: 100%;
-
+  max-width: 2rem;
+  max-height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  max-width: 3.2rem;
-  max-height: 3.2rem;
-
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
