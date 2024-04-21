@@ -1,4 +1,3 @@
-import { clear } from "console";
 import { RefObject } from "react";
 
 export function drawPixel(

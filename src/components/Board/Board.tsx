@@ -5,7 +5,6 @@ import { clearCanvas, drawImage, drawLoading, getMousePosition } from "@/lib/can
 import BoardToolbar from "../BoardToolbar/BoardToolbar";
 import ColorPickerPreview from '@/components/ColorPickerPreview/ColorPickerPreview';
 import useColorPickerStore, { ColorPickerStore } from "@/store/colorPicker";
-import { off } from "process";
 
 interface PreviewData {
     data: Uint8ClampedArray | null;
@@ -53,7 +52,6 @@ const Board: React.FC = () => {
     useEffect(() => {
         imgRef.current = null;
         draw();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ctx, image]);
 
     const draw = () => {
@@ -109,9 +107,8 @@ const Board: React.FC = () => {
 
     const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
         if (!ctx) { return; }
-        if (isDragging) {
-            panCanvas(e);
-        }
+
+        if (isDragging) { panCanvas(e); }
         updatePreviewPosition(e);
 
     }
@@ -128,7 +125,7 @@ const Board: React.FC = () => {
 
     const updatePreviewPosition = (e: React.MouseEvent<HTMLCanvasElement>) => {
         if (!ctx) { return; }
-        const { x, y } = getMousePosition(ctx!, e);
+        const { x, y } = getMousePosition(ctx, e);
         const previewX = x - previewSize / 2;   // Offsetting preview's origin point 
         const previewY = y - previewSize / 2;   // Offsetting preview's origin point 
 
