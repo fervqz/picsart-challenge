@@ -1,17 +1,15 @@
 'use client';
 import './styles.css';
 import React, { CSSProperties, useEffect, useRef, useState } from 'react';
-import { drawPixel, parseUint8ClampedArray } from '@/lib/utils';
+import { parseUint8ClampedArray } from '@/lib/color.utils';
+import { drawPixel } from '@/lib/canvas.utils';
 import PreviewRingSVG from '../svgs/PreviewRingSVG/PreviewRingSVG';
 import useColorPickerStore, { ColorPickerStore } from '@/store/colorPicker';
 
 interface Props {
     data: Uint8ClampedArray | null;
     size: number;
-    position: {
-        x: number;
-        y: number;
-    }
+    position: { x: number; y: number; }
 }
 
 const ColorPickerPreview: React.FC<Props> = ({ data, size, position }: Readonly<Props>) => {
@@ -40,7 +38,7 @@ const ColorPickerPreview: React.FC<Props> = ({ data, size, position }: Readonly<
     useEffect(() => {
         setColorDropperWrapperStyles((prev) => ({
             ...prev,
-            transform: `translate(${position.x}px, ${position.y}px)`,
+            transform: `translate3d(${position.x}px, ${position.y}px, 0px)`,
         }));
     }, [position]);
 
