@@ -16,7 +16,6 @@ The app was made with React, Typescript and vanilla CSS. It is hosted on vercel 
       - [2. Getting the Image Data](#2-getting-the-image-data)
       - [3. Color Picker Preview](#3-color-picker-preview)
       - [4. Follow the Mouse](#4-follow-the-mouse)
-    - [Things to Improve](#things-to-improve)
 
 ### How to run
 
@@ -40,7 +39,8 @@ The app was made with React, Typescript and vanilla CSS. It is hosted on vercel 
 - **Color comparison**: When hovering over a color, it will show the hovering color next to the last current color so it's easy to compare.
 - **Image Selection**: There's is a select that allows the user to select an image from the list of images.
 - **Zoom**: The user can zoom in and out to fit the image in the canvas.
-- **Precision Test**: The app renders a section with small squares that are used to test the color picker pixel accuracy. It is located at top left corner of the canvas.
+- **Pan**: The user can pan to see the whole image.
+- **Copy to clipboard**: The user can copy the color picker hexadecimal value to clipboard.
 
 ### Approach
 
@@ -73,6 +73,3 @@ After that, I clip the element with a circle and add the SVG ring on top of it.
 The only thing left was following the mouse. The preview is moved every time the mouse updates it's position, it transitions with a small delay of 20ms that makes it smoother.
 
 ![follow-mouse](./public/docs/follow-mouse.png) 
-
-### Things to Improve
-- The image flikers when zooming in and out. It can be solved by rendering a temporary canvas with the last state of the main canvas before sacling it and then draw the new image to the main canvas.
