@@ -94,18 +94,14 @@ const Board: React.FC = () => {
         if (!ctx) { return; }
 
         const scaleFactor = e.deltaY > 0 ? 0.9 : 1.1;
-        const rect = ctx.canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const offsetX = mouseX * (1 - scaleFactor);
-        const offsetY = mouseY * (1 - scaleFactor);
-
+        const { x, y } = getMousePosition(ctx, e);
+        const offsetX = x * (1 - scaleFactor);
+        const offsetY = y * (1 - scaleFactor);
         setCurrentScale(prev => prev * scaleFactor);
 
         window.requestAnimationFrame(() => {
             clearCanvas(ctx);
-            ctx.translate(offsetX, offsetY);
-            ctx.scale(scaleFactor, scaleFactor);
+            ctx.transform(scaleFactor, 0, 0, scaleFactor, offsetX, offsetY);
             draw();
         });
     }
