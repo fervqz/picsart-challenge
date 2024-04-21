@@ -49,55 +49,9 @@ export function getMousePosition(ctx: CanvasRenderingContext2D, e: React.MouseEv
     return { x, y };
 }
 
-// export function panCanvas(ctx: CanvasRenderingContext2D, x: number, y: number) {
-
-//     const w = ctx.canvas.width;
-//     const h = ctx.canvas.height;
-
-//     const xOffset = x - w / 2;
-//     const yOffset = y - h / 2;
-
-//     ctx.translate(xOffset, yOffset);
-// }
-
-export function drawPrecisionTest(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, 180, 50);
-
-    ctx.font = "16px Arial";
-    ctx.fillStyle = 'black';
-    ctx.fillText("Precision Test Section", 5, 35);
-
-    ctx.fillStyle = 'red';
-    ctx.fillRect(0, 0, 10, 10);
-    ctx.fillStyle = '#00ff00';
-    ctx.fillRect(10, 0, 10, 10);
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(20, 0, 10, 10);
-
-    ctx.fillStyle = 'red';
-    ctx.fillRect(30, 0, 5, 5);
-    ctx.fillStyle = '#00ff00';
-    ctx.fillRect(35, 0, 5, 5);
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(40, 0, 5, 5);
-
-    ctx.fillStyle = 'red';
-    ctx.fillRect(45, 0, 2, 2);
-    ctx.fillStyle = '#00ff00';
-    ctx.fillRect(47, 0, 2, 2);
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(49, 0, 2, 2);
-
-    ctx.fillStyle = 'red';
-    ctx.fillRect(51, 0, 1, 1);
-    ctx.fillStyle = '#00ff00';
-    ctx.fillRect(52, 0, 1, 1);
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(53, 0, 1, 1);
-}
-
 export function clearCanvas(ctx: CanvasRenderingContext2D) {
     if (!ctx) { return; }
     ctx.clearRect(-10000, -10000, 50000, 50000);
+    ctx.fillStyle = '#ededed';
+    ctx.fillRect(-10000, -10000, 50000, 50000);
 }
