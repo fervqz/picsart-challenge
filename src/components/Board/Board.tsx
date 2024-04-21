@@ -1,7 +1,7 @@
 'use client';
 import "./styles.css";
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { clearCanvas, renderPrecissionTest } from "@/lib/utils";
+import { clearCanvas, renderPrecisionTest } from "@/lib/utils";
 import BoardToolbar from "../BoardToolbar/BoardToolbar";
 import ColorPickerPreview from '@/components/ColorPickerPreview/ColorPickerPreview';
 import useColorPickerStore, { ColorPickerStore } from "@/store/colorPicker";
@@ -50,7 +50,7 @@ const Board: React.FC = () => {
 
     /**
      * Renders the image to the canvas,
-     * also adds the renderPrecissionTest section
+     * also adds the renderPrecisionTest section
      */
     const draw = () => {
         if (!ctx) { return; }
@@ -63,7 +63,7 @@ const Board: React.FC = () => {
             const imgWidth = img.width * .5;
             const imgHeight = img.height * .5;
             ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
-            renderPrecissionTest(ctx);
+            renderPrecisionTest(ctx);
         };
     }
 

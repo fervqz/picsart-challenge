@@ -11,7 +11,7 @@ The app was made with React, Typescript and vanilla CSS. It is hosted on vercel 
     - [Contents](#contents)
     - [How to run](#how-to-run)
     - [Features](#features)
-    - [Aproach](#aproach)
+    - [Approach](#approach)
       - [1. Sketching](#1-sketching)
       - [2. Getting the Image Data](#2-getting-the-image-data)
       - [3. Color Picker Preview](#3-color-picker-preview)
@@ -34,15 +34,15 @@ The app was made with React, Typescript and vanilla CSS. It is hosted on vercel 
 **Technical Requirements**
 - [x] **Usage of Canvas**: The HTML canvas tag was used in the main working are and for the preview.
 - [x] **Usage of Typescript**: The project was written in Typescript..
-- [x] **Being able to work with at least 16 MB(4000 * 4000) canvas**: The projects handdles large images, it is possbile to zoom in and out to fit the images in the canvas. Also, theres is a select option that sets different images to test.
+- [x] **Being able to work with at least 16 MB(4000 * 4000) canvas**: The projects handdles large images, it is possible to zoom in and out to fit the images in the canvas. Also, there's is a select option that sets different images to test.
 
 **Extra features**
 - **Color comparison**: When hovering over a color, it will show the hovering color next to the last current color so it's easy to compare.
-- **Image Selection**: Theres is a dropdown that allows the user to select an image from the list of images.
+- **Image Selection**: There's is a select that allows the user to select an image from the list of images.
 - **Zoom**: The user can zoom in and out to fit the image in the canvas.
-- **Prevision Test**: The app renders a section with small squares that are used to test the color picker pixel accuracy. It is located at top left corner of the canvas.
+- **Precision Test**: The app renders a section with small squares that are used to test the color picker pixel accuracy. It is located at top left corner of the canvas.
 
-### Aproach
+### Approach
 
 #### 1. Sketching
 Before starting to code, I did some sketching to get a better idea of the requirements and make important decisions, like app layout, canvas position and preview size.
@@ -70,7 +70,7 @@ After that, I clip the element with a circle and add the SVG ring on top of it.
 ![preview](./public/docs/preview.png) 
 
 #### 4. Follow the Mouse
-The only thing left was following the mouse. The preview is moved every time the mouse updates it's positon, it transitionates with a small delay of 20ms that makes it smoother.
+The only thing left was following the mouse. The preview is moved every time the mouse updates it's position, it transitions with a small delay of 20ms that makes it smoother.
 
 ![follow-mouse](./public/docs/follow-mouse.png) 
 

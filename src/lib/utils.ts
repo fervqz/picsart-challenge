@@ -36,13 +36,13 @@ export function rgbToHex(
     return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('').toUpperCase();
 }
 
-export function renderPrecissionTest(ctx: CanvasRenderingContext2D) {
+export function renderPrecisionTest(ctx: CanvasRenderingContext2D) {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 180, 50);
 
     ctx.font = "16px Arial";
     ctx.fillStyle = 'black';
-    ctx.fillText("Precission Test Section", 5, 35);
+    ctx.fillText("Precision Test Section", 5, 35);
 
     ctx.fillStyle = 'red';
     ctx.fillRect(0, 0, 10, 10);
