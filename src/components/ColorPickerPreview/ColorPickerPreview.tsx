@@ -32,7 +32,6 @@ const ColorPickerPreview: React.FC<Props> = ({ data, size, position }: Readonly<
         if (!data) { return; }
         setColors(parseUint8ClampedArray(data));
         draw();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     useEffect(() => {

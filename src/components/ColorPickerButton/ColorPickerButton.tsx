@@ -15,7 +15,6 @@ const ColorPickerButton = () => {
 
     useEffect(() => {
         setActiveTool(isToolActive ? 'color-picker' : null);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isToolActive]);
 
     const handleClick = () => {
