@@ -2,7 +2,7 @@
 
 This is a web application for the Picsart Challenge.
 
-The app was made with React, Typescript and vanilla CSS. It is hosted on vercel so you can check a live demo [here](https://picsart-challenge.vercel.app/).
+The app was made with NextJS, Typescript and vanilla CSS. It is hosted on vercel so you can check a live demo [here](https://picsart-challenge.vercel.app/).
 
 ![sketching](./public/docs/shot.png)
 
